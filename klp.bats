@@ -20,3 +20,6 @@
     ./klp_tc_8.sh
 }
 
+@test "Exercise stack checking" {
+    ./klp_tc_9.sh
+}

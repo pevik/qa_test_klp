@@ -22,3 +22,7 @@ TC7 Test kernel live patching in low-memory condition
 
 TC8 Patch with replace-all
     * Make sure "replace-all" KLP function works as expected.
+
+TC9 Exercise stack checking
+    * Make sure that patching does not progress when there is positively a user
+      of a patched function
