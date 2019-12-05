@@ -28,7 +28,8 @@ function __klp_add_patched_func() {
 }
 
 function klp_create_header() {
-    sed "s%@@USE_OLD_HRTIMER_API@@%$KLP_TEST_HRTIMER_OLD%" \
+    sed -e "s%@@USE_OLD_HRTIMER_API@@%$KLP_TEST_HRTIMER_OLD%" \
+	    -e "s%@@USE_OLD_REG_API@@%$KLP_TEST_REG_API%" \
 	    "${SOURCE_DIR}/klp_test_support_mod.h" \
 	    > "${OUTPUT_DIR}/klp_test_support_mod.h"
 }
@@ -305,6 +306,14 @@ if [ ! -f $KLP_ENV_CACHE_FILE ]; then
 
     echo -n 'export KLP_TEST_HRTIMER_OLD=' > $KLP_ENV_CACHE_FILE
     if klp_compile_module $COMPILETEST_DIR/klp_compile_test_hrtimer.c > /dev/null 2>&1;
+    then
+        echo "1" >> $KLP_ENV_CACHE_FILE
+    else
+        echo "0" >> $KLP_ENV_CACHE_FILE
+    fi
+
+    echo -n 'export KLP_TEST_REG_API=' >> $KLP_ENV_CACHE_FILE
+    if grep klp_register_patch "/lib/modules/$(uname -r)/source/include/linux/livepatch.h"
     then
         echo "1" >> $KLP_ENV_CACHE_FILE
     else

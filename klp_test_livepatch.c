@@ -1,7 +1,7 @@
 /*
  * klp_test_livepatch - test livepatch template
  *
- *  Copyright (c) 2017-2018 SUSE
+ *  Copyright (c) 2017-2019 SUSE
  *   Authors: Libor Pechacek, Nicolai Stange
  */
 
@@ -67,7 +67,7 @@ static struct klp_patch patch = {
 
 static int livepatch_init(void)
 {
-#ifndef KLP_NOREG_API
+#if USE_OLD_REG_API
 	int ret;
 
 	ret = klp_register_patch(&patch);
@@ -86,7 +86,7 @@ static int livepatch_init(void)
 
 static void livepatch_exit(void)
 {
-#ifndef KLP_NOREG_API
+#if USE_OLD_REG_API
 	WARN_ON(klp_unregister_patch(&patch));
 #endif
 }

@@ -1,7 +1,7 @@
 /*
  * klp_test_support_mod - support module for KLP testing
  *
- *  Copyright (c) 2018 SUSE
+ *  Copyright (c) 2018-2019 SUSE
  *   Author: Nicolai Stange
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -21,6 +21,7 @@
 #include <asm/uaccess.h>
 
 #define USE_OLD_HRTIMER_API @@USE_OLD_HRTIMER_API@@
+#define USE_OLD_REG_API @@USE_OLD_REG_API@@
 
 #if defined(PATCH_ID)
 #define __PATCHED_SYM(id, sym) klp_ ## id ## _ ## sym
